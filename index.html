@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendizagem Electrolux SENAI — Dilemas Éticos na Indústria</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#011e41',      // SENAI / Electrolux Dark Navy
+                            blue: '#005fb8',      // Electrolux Vivid Blue
+                            red: '#e30613',       // SENAI Red Accent
+                            lightBlue: '#e6f0fa',
+                            gray: '#f4f6f9',
+                            darkGray: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Print Specific Styles for A4 PDF Generation */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 11pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            .print-card {
+                border: 1px solid #94a3b8 !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+                margin-bottom: 1.2rem;
+                padding: 1rem !important;
+            }
+            .print-header {
+                border-bottom: 2px solid #011e41;
+                padding-bottom: 12px;
+                margin-bottom: 16px;
+            }
+            textarea {
+                border: 1px solid #cbd5e1 !important;
+                resize: none !important;
+                background: #f8fafc !important;
+                padding: 8px !important;
+                min-height: 80px;
+            }
+            @page {
+                margin: 1.5cm;
+                size: A4 portrait;
+            }
+        }
+
+        .print-only {
+            display: none;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans text-slate-800 antialiased bg-slate-100">
+
+    <!-- TOP HEADER / NAVBAR (no-print) -->
+    <header class="bg-brand-navy text-white shadow-lg sticky top-0 z-40 no-print border-b-2 border-brand-red">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Branding Header -->
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <div class="bg-white text-brand-navy px-3 py-1.5 rounded-lg font-black text-lg sm:text-xl tracking-wider flex items-center shadow-sm">
+                        <span class="text-brand-red mr-1">SENAI</span>
+                        <span class="text-slate-300 mx-1">|</span>
+                        <span class="text-brand-blue">ELECTROLUX</span>
+                    </div>
+                    <div class="hidden md:block border-l border-slate-600 h-8"></div>
+                    <span class="hidden md:inline-block text-xs sm:text-sm font-medium text-slate-300">
+                        Estudo de Caso & Encenação de Dilemas Industriais
+                    </span>
+                </div>
+
+                <!-- Teacher Area Button -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="openTeacherModal()" class="bg-brand-blue hover:bg-blue-600 text-white px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition flex items-center shadow-sm border border-blue-400/30">
+                        <i class="fa-solid fa-user-gear mr-2"></i> Área do Professor
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+        <!-- HEADER BANNER & INSTRUCTIONS (no-print) -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 no-print">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div class="space-y-3 lg:max-w-3xl">
+                    <div class="inline-flex items-center space-x-2 bg-blue-50 text-brand-blue px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                        <i class="fa-solid fa-users-gear"></i> Relações Socioprofissionais, Cidadania e Ética
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-brand-navy leading-tight">
+                        Estudo de Caso e Encenação: Dilemas no Chão de Fábrica
+                    </h1>
+                    <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                        Bem-vindos, aprendizes! Esta atividade interativa visa analisar e encenar dilemas técnicos e comportamentais reais enfrentados no cotidiano industrial. Formem <strong>5 grupos (de 1 a 3 alunos)</strong> para resolver os casos, realizar a encenação em sala e submeter a análise do grupo.
+                    </p>
+                </div>
+
+                <!-- Google Drive Notice Card (Updated: No input/link needed) -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm lg:w-80 shrink-0 space-y-3">
+                    <div class="flex items-center space-x-2 text-xs font-bold text-brand-blue uppercase tracking-wider">
+                        <i class="fa-brands fa-google-drive text-emerald-600 text-base"></i>
+                        <span>Instrução de Entrega (PDF)</span>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                        O endereço/link da pasta no <strong>Google Drive</strong> para envio do relatório PDF gerado nesta aplicação será fornecido diretamente pelo <strong>professor em sala de aula</strong>.
+                    </p>
+                    <div class="bg-white/80 border border-blue-100 rounded-lg p-2 text-[11px] text-slate-500 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-circle-info text-brand-blue"></i>
+                        <span>Gere o PDF ao final e aguarde a instrução do docente.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 STEP PROCESS WORKFLOW -->
+            <div class="mt-8 pt-6 border-t border-slate-100">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Fluxo da Atividade em 5 Passos:</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-center flex flex-col items-center">
+                        <span class="w-7 h-7 rounded-full bg-brand-navy text-white text-xs font-bold flex items-center justify-center mb-1.5">1</span>
+                        <span class="text-xs font-semibold text-slate-800">Cadastrar Equipe</span>
+                        <span class="text-[10px] text-slate-500">1 a 3 integrantes</span>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-center flex flex-col items-center">
+                        <span class="w-7 h-7 rounded-full bg-brand-blue text-white text-xs font-bold flex items-center justify-center mb-1.5">2</span>
+                        <span class="text-xs font-semibold text-slate-800">Escolher Caso</span>
+                        <span class="text-[10px] text-slate-500">Exclusivo por grupo</span>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-center flex flex-col items-center">
+                        <span class="w-7 h-7 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center mb-1.5">3</span>
+                        <span class="text-xs font-semibold text-slate-800">Ensaio & Teatral</span>
+                        <span class="text-[10px] text-slate-500">Ato 1 e Ato 2 em sala</span>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-center flex flex-col items-center">
+                        <span class="w-7 h-7 rounded-full bg-amber-600 text-white text-xs font-bold flex items-center justify-center mb-1.5">4</span>
+                        <span class="text-xs font-semibold text-slate-800">Responder 5 Questões</span>
+                        <span class="text-[10px] text-slate-500">Análise no sistema</span>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-center flex flex-col items-center col-span-2 md:col-span-1">
+                        <span class="w-7 h-7 rounded-full bg-emerald-600 text-white text-xs font-bold flex items-center justify-center mb-1.5">5</span>
+                        <span class="text-xs font-semibold text-slate-800">Gerar PDF & Enviar</span>
+                        <span class="text-[10px] text-slate-500">No Drive do Professor</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAVIGATION TABS (no-print) -->
+        <div class="border-b border-slate-200 no-print">
+            <nav class="flex space-x-2 md:space-x-8 overflow-x-auto pb-1" aria-label="Tabs">
+                <button onclick="switchTab('cadastro')" id="tab-cadastro" class="tab-btn px-4 py-3 font-semibold text-sm border-b-2 border-brand-blue text-brand-blue flex items-center space-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-users"></i>
+                    <span>1. Painel de Grupos & Casos</span>
+                </button>
+                <button onclick="switchTab('estudo')" id="tab-estudo" class="tab-btn px-4 py-3 font-semibold text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-700 flex items-center space-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>2. Estudo de Caso & Questionário</span>
+                </button>
+                <button onclick="switchTab('roteiro')" id="tab-roteiro" class="tab-btn px-4 py-3 font-semibold text-sm border-b-2 border-transparent text-slate-500 hover:text-slate-700 flex items-center space-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-masks-theater"></i>
+                    <span>3. Guia de Encenação em Sala</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- ================= TAB 1: CADASTRO E ESCOLHA DE CASOS ================= -->
+        <div id="content-cadastro" class="tab-content space-y-6 no-print">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Registration Form Column -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-5">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h2 class="text-lg font-bold text-brand-navy flex items-center">
+                            <i class="fa-solid fa-user-plus text-brand-blue mr-2"></i> Cadastro da Equipe
+                        </h2>
+                        <p class="text-xs text-slate-500">Selecione o número do grupo e insira os nomes dos integrantes.</p>
+                    </div>
+
+                    <form id="groupRegisterForm" onsubmit="handleRegisterGroup(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Selecione o Grupo:</label>
+                            <select id="selectGroupNumber" required onchange="onGroupSelectChange()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                                <option value="1">Grupo 1</option>
+                                <option value="2">Grupo 2</option>
+                                <option value="3">Grupo 3</option>
+                                <option value="4">Grupo 4</option>
+                                <option value="5">Grupo 5</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-3 pt-1">
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Integrantes da Equipe (1 a 3 Alunos):</label>
+                            
+                            <div>
+                                <span class="text-[11px] font-medium text-slate-500 block mb-0.5">Aluno 1 (Obrigatório):</span>
+                                <input type="text" id="member1" required placeholder="Nome completo do participante 1" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                            </div>
+
+                            <div>
+                                <span class="text-[11px] font-medium text-slate-500 block mb-0.5">Aluno 2 (Opcional):</span>
+                                <input type="text" id="member2" placeholder="Nome completo do participante 2" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                            </div>
+
+                            <div>
+                                <span class="text-[11px] font-medium text-slate-500 block mb-0.5">Aluno 3 (Opcional):</span>
+                                <input type="text" id="member3" placeholder="Nome completo do participante 3" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Escolha o Estudo de Caso:</label>
+                            <select id="selectCaseId" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                                <!-- Populated dynamically -->
+                            </select>
+                            <p class="text-[11px] text-amber-700 mt-1 flex items-center">
+                                <i class="fa-solid fa-lock text-[10px] mr-1"></i> Ao confirmar, este caso ficará reservado exclusivamente para o seu grupo.
+                            </p>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-navy hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl shadow transition text-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Salvar & Confirmar Reserva</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Active Teams & Case Status Dashboard -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                            <h2 class="text-lg font-bold text-brand-navy flex items-center">
+                                <i class="fa-solid fa-layer-group text-brand-blue mr-2"></i> Status dos Casos na Turma
+                            </h2>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium">5 Casos Disponíveis</span>
+                        </div>
+
+                        <!-- Grid of 5 Cases -->
+                        <div id="casesStatusGrid" class="space-y-3">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= TAB 2: ESTUDO DE CASO E QUESTIONÁRIO ================= -->
+        <div id="content-estudo" class="tab-content hidden space-y-6">
+
+            <!-- Active Group Banner / Selector (no-print) -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 no-print">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-brand-blue text-white p-3 rounded-xl">
+                        <i class="fa-solid fa-graduation-cap text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">Visualizando Trabalho do:</span>
+                        <div id="activeGroupDisplayTitle" class="text-lg font-extrabold text-brand-navy">
+                            Grupo Selecionado
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3 w-full md:w-auto">
+                    <label class="text-xs font-bold text-slate-500 whitespace-nowrap">Alternar Grupo:</label>
+                    <select id="switchActiveGroupSelect" onchange="changeActiveGroupView(this.value)" class="bg-slate-100 border border-slate-300 rounded-lg p-2 text-xs font-bold text-slate-700">
+                        <option value="1">Grupo 1</option>
+                        <option value="2">Grupo 2</option>
+                        <option value="3">Grupo 3</option>
+                        <option value="4">Grupo 4</option>
+                        <option value="5">Grupo 5</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- PRINT HEADER ONLY VISIBLE ON PDF PRINT -->
+            <div class="print-only print-header">
+                <div class="flex justify-between items-center border-b-2 border-slate-900 pb-3 mb-3">
+                    <div>
+                        <h1 class="text-lg font-black text-slate-900 uppercase">SENAI PR | ELECTROLUX DO BRASIL</h1>
+                        <p class="text-xs text-slate-600">Curso de Aprendizagem Técnica — Relações Socioprofissionais, Cidadania e Ética</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] font-bold text-slate-500 block uppercase">Data de Apresentação</span>
+                        <span class="text-xs font-extrabold text-slate-800" id="printDate">--/--/----</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3 rounded border border-slate-300 grid grid-cols-2 gap-2 text-xs mb-3">
+                    <div><strong>Equipe:</strong> <span id="printGroupName">--</span></div>
+                    <div><strong>Caso Atribuído:</strong> <span id="printCaseTitle">--</span></div>
+                    <div class="col-span-2"><strong>Integrantes:</strong> <span id="printMembers">--</span></div>
+                </div>
+            </div>
+
+            <!-- CASE DETAIL DISPLAY -->
+            <div id="caseDetailCard" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden print-card">
+                <!-- Case Header -->
+                <div class="bg-brand-navy text-white p-6 md:p-8">
+                    <div class="flex items-center space-x-2 text-xs font-bold text-blue-300 uppercase tracking-widest mb-2">
+                        <span id="caseCategoryBadge" class="bg-blue-900/60 border border-blue-400/30 px-3 py-1 rounded-full">Dilema Fabril Electrolux</span>
+                    </div>
+                    <h2 id="caseDisplayTitle" class="text-2xl md:text-3xl font-black mb-2">Selecione um grupo para carregar o caso.</h2>
+                    <p id="caseDisplaySubtitle" class="text-slate-300 text-sm md:text-base">Aguardando dados de cadastro...</p>
+                </div>
+
+                <!-- Case Body & Details -->
+                <div class="p-6 md:p-8 space-y-6">
+                    
+                    <!-- Context Box -->
+                    <div class="bg-slate-50 rounded-xl p-5 border border-slate-200">
+                        <h3 class="text-xs font-bold text-brand-blue uppercase tracking-wider mb-2 flex items-center">
+                            <i class="fa-solid fa-industry mr-2"></i> Contexto da Linha de Produção
+                        </h3>
+                        <p id="caseDisplayContext" class="text-slate-700 text-sm leading-relaxed">...</p>
+                    </div>
+
+                    <!-- Characters Grid -->
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Personagens da Encenacao:</h3>
+                        <div id="caseDisplayCharacters" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Technical vs Behavioral Dilemma -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+                            <h4 class="text-xs font-bold text-red-800 uppercase tracking-wide flex items-center mb-1">
+                                <i class="fa-solid fa-triangle-exclamation mr-1.5 text-red-600"></i> Dilema Técnico / Operacional
+                            </h4>
+                            <p id="caseDisplayTechDilemma" class="text-xs text-red-950 leading-relaxed">...</p>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                            <h4 class="text-xs font-bold text-amber-800 uppercase tracking-wide flex items-center mb-1">
+                                <i class="fa-solid fa-user-shield mr-1.5 text-amber-600"></i> Dilema Comportamental / Ético
+                            </h4>
+                            <p id="caseDisplayBehavioralDilemma" class="text-xs text-amber-950 leading-relaxed">...</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- DIAGNOSTIC FORM: 5 REQUIRED QUESTIONS -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6 print-card">
+                <div class="border-b border-slate-100 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-2">
+                    <div>
+                        <h2 class="text-xl font-bold text-brand-navy flex items-center">
+                            <i class="fa-solid fa-clipboard-question text-brand-blue mr-2"></i> Análise e Diagnóstico Ético do Grupo
+                        </h2>
+                        <p class="text-xs text-slate-500">Responda detalhadamente às 5 questões abaixo referentes ao dilema do seu grupo.</p>
+                    </div>
+                    <span class="text-xs font-bold bg-blue-50 text-brand-blue px-3 py-1 rounded-full w-max">
+                        5 Respostas Obrigatórias
+                    </span>
+                </div>
+
+                <form id="caseQuestionsForm" onsubmit="handleSaveAnswers(event)" class="space-y-6">
+                    
+                    <!-- Q1 -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-slate-800">
+                            1. Diagnóstico do Dilema: <span class="font-normal text-slate-600">Diferencie os aspectos estritamente técnicos (procedimento, peça, máquina) das falhas atitudinais/comportamentais da cena.</span>
+                        </label>
+                        <textarea id="ans1" rows="3" required placeholder="Explique onde o procedimento operacional falhou e qual atitude errada desencadeou o problema..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-slate-800">
+                            2. Impacto Operacional e Humano: <span class="font-normal text-slate-600">Quais as consequências reais para a segurança, qualidade, custo da empresa e para o clima da equipe se nada for feito?</span>
+                        </label>
+                        <textarea id="ans2" rows="3" required placeholder="Detalhe os impactos financeiros, riscos de acidentes, perda de garantia ou desmotivação do grupo..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-slate-800">
+                            3. Princípios Éticos e Regras Aplicáveis: <span class="font-normal text-slate-600">Quais valores e diretrizes da Electrolux e do SENAI (ex: Transparência, Segurança em 1º Lugar, Respeito à Diversidade) foram violados?</span>
+                        </label>
+                        <textarea id="ans3" rows="3" required placeholder="Liste e comente pelo menos 3 princípios morais ou normas internas descumpridas..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-slate-800">
+                            4. Roteiro Resumido das Encenações (Ato 1 vs. Ato 2): <span class="font-normal text-slate-600">Como o grupo estruturou a encenação do problema (Ato 1) e como foi apresentada a solução ética ideal (Ato 2)?</span>
+                        </label>
+                        <textarea id="ans4" rows="3" required placeholder="Resuma em poucas linhas a mudança de postura das atuações entre o erro e a solução..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-slate-800">
+                            5. Plano de Ação Preventivo e Corretivo: <span class="font-normal text-slate-600">Que medidas concretas devem ser adotadas no chão de fábrica para evitar que essa situação volte a acontecer?</span>
+                        </label>
+                        <textarea id="ans5" rows="3" required placeholder="Sugira treinamentos, DDS (Diálogo Diário de Segurança), ajustes de processo ou auditorias de 5S..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Actions Buttons -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 no-print border-t border-slate-100">
+                        <button type="submit" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition shadow flex items-center justify-center space-x-2 text-sm">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Salvar Respostas</span>
+                        </button>
+
+                        <button type="button" onclick="generateAndPrintPDF()" class="w-full sm:w-auto bg-brand-navy hover:bg-slate-900 text-white font-bold py-3 px-6 rounded-xl transition shadow flex items-center justify-center space-x-2 text-sm">
+                            <i class="fa-solid fa-file-pdf text-red-400"></i>
+                            <span>Gerar Relatório em PDF / Imprimir</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TEACHER EVALUATION BOX (PRINT ONLY) -->
+            <div class="print-only print-card bg-slate-50 border-2 border-slate-400 p-4 rounded-xl mt-6">
+                <h3 class="text-xs font-black text-slate-900 uppercase mb-2 border-b border-slate-300 pb-1 flex justify-between items-center">
+                    <span>AVALIAÇÃO DO PROFESSOR / DOCENTE SENAI</span>
+                    <span>RUBRICA DE NOTA</span>
+                </h3>
+                <div class="grid grid-cols-4 gap-3 text-xs mb-3">
+                    <div class="border border-slate-200 bg-white p-2 rounded">
+                        <span class="block text-slate-500 font-bold text-[10px]">DIAGNÓSTICO (0-2.5)</span>
+                        <div class="text-xs font-bold text-slate-800 mt-1">[ ____ ]</div>
+                    </div>
+                    <div class="border border-slate-200 bg-white p-2 rounded">
+                        <span class="block text-slate-500 font-bold text-[10px]">ENCENAÇÃO (0-2.5)</span>
+                        <div class="text-xs font-bold text-slate-800 mt-1">[ ____ ]</div>
+                    </div>
+                    <div class="border border-slate-200 bg-white p-2 rounded">
+                        <span class="block text-slate-500 font-bold text-[10px]">FUND. ÉTICA (0-2.5)</span>
+                        <div class="text-xs font-bold text-slate-800 mt-1">[ ____ ]</div>
+                    </div>
+                    <div class="border border-slate-200 bg-white p-2 rounded">
+                        <span class="block text-slate-500 font-bold text-[10px]">PLANO DE AÇÃO (0-2.5)</span>
+                        <div class="text-xs font-bold text-slate-800 mt-1">[ ____ ]</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 text-xs mb-3">
+                    <div>
+                        <span class="block text-slate-500 font-bold">NOTA FINAL DO GRUPO:</span>
+                        <div id="printTeacherGrade" class="text-xl font-black text-brand-navy mt-1">[ ____ / 10.0 ]</div>
+                    </div>
+                    <div class="col-span-2">
+                        <span class="block text-slate-500 font-bold">PARECER / FEEDBACK DO PROFESSOR:</span>
+                        <div id="printTeacherFeedback" class="text-xs text-slate-700 mt-1 italic">__________________________________________________________________________________________</div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-slate-300 pt-3 flex justify-between items-end text-[10px] text-slate-500">
+                    <span>Assinatura do Docente: __________________________________________</span>
+                    <span>Unidade SENAI / Electrolux Brasil</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= TAB 3: GUIA DE ENCENAÇÃO ================= -->
+        <div id="content-roteiro" class="tab-content hidden space-y-6 no-print">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase">
+                        Dinâmica Teatral em Sala
+                    </span>
+                    <h2 class="text-2xl font-black text-brand-navy mt-2">Instruções para a Encenação Teatral</h2>
+                    <p class="text-slate-600 text-sm">Cada equipe de 1 a 3 alunos terá até 5 minutos de apresentação para a turma.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- ATO 1 -->
+                    <div class="bg-red-50/80 border border-red-200 rounded-xl p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="bg-red-600 text-white font-bold text-xs px-2.5 py-1 rounded-lg">ATO 1</span>
+                            <span class="text-xs font-semibold text-red-700"><i class="fa-regular fa-clock mr-1"></i>2 Minutos</span>
+                        </div>
+                        <h3 class="font-bold text-red-950 text-base">Encenar o Erro / Dilema</h3>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            O grupo representa a cena real mostrando a pressão por metas, o atalho de segurança, o preconceito ou a ocultação da falha de forma realista.
+                        </p>
+                    </div>
+
+                    <!-- ATO 2 -->
+                    <div class="bg-emerald-50/80 border border-emerald-200 rounded-xl p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="bg-emerald-600 text-white font-bold text-xs px-2.5 py-1 rounded-lg">ATO 2</span>
+                            <span class="text-xs font-semibold text-emerald-700"><i class="fa-regular fa-clock mr-1"></i>2 Minutos</span>
+                        </div>
+                        <h3 class="font-bold text-emerald-950 text-base">Encenar a Solução Ética</h3>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Reencenação da mesma situação demonstrando postura profissional madura, comunicação assertiva, respeito às regras e transparência.
+                        </p>
+                    </div>
+
+                    <!-- ATO 3 / DEBATE -->
+                    <div class="bg-blue-50/80 border border-blue-200 rounded-xl p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="bg-brand-blue text-white font-bold text-xs px-2.5 py-1 rounded-lg">ATO 3</span>
+                            <span class="text-xs font-semibold text-brand-blue"><i class="fa-regular fa-clock mr-1"></i>1 Minuto</span>
+                        </div>
+                        <h3 class="font-bold text-brand-navy text-base">Defesa dos Valores</h3>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Apresentação oral breve destacando qual norma da Electrolux/SENAI evitou o problema e por que a solução foi responsável.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tips for Acting -->
+                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200">
+                    <h4 class="font-bold text-slate-800 text-sm mb-3 flex items-center">
+                        <i class="fa-solid fa-lightbulb text-amber-500 mr-2"></i> Recomendações para uma excelente apresentação:
+                    </h4>
+                    <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside leading-relaxed">
+                        <li>Fale de forma clara e pausada para que os colegas do fundo da sala compreendam.</li>
+                        <li>Entrem no papel dos personagens! Vivenciem o nervosismo do jovem aprendiz e a cobrança do operador veterano.</li>
+                        <li>Não é necessário figurino avançado; foquem na clareza do diálogo e nos gestos profissionais.</li>
+                        <li>Caso o grupo tenha apenas 1 ou 2 integrantes, faça a leitura dos papéis dos personagens com trocas de tom de voz.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER WITH GITHUB PAGES GUIDE (no-print) -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="font-bold text-brand-navy">Electrolux do Brasil S.A. & SENAI PR</span>
+                <span>— Aprendizagem Técnica</span>
+            </div>
+            
+            <button onclick="openGithubHelpModal()" class="text-brand-blue hover:underline flex items-center space-x-1 font-semibold">
+                <i class="fa-brands fa-github"></i>
+                <span>Como publicar este app no GitHub Pages?</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- ================= MODAL: TEACHER DASHBOARD ================= -->
+    <div id="teacherModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden no-print">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 space-y-6">
+            
+            <!-- Auth Screen -->
+            <div id="teacherAuthSection" class="space-y-4 max-w-md mx-auto py-8">
+                <div class="text-center space-y-2">
+                    <div class="w-12 h-12 bg-brand-navy text-white rounded-2xl flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900">Painel do Docente SENAI</h3>
+                    <p class="text-xs text-slate-500">Digite a senha de acesso para visualizar o progresso e lançar notas.</p>
+                </div>
+
+                <form onsubmit="handleTeacherLogin(event)" class="space-y-3">
+                    <input type="password" id="teacherPassword" placeholder="Senha do professor (padrão: senai2026)" required class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue focus:outline-none">
+                    <button type="submit" class="w-full bg-brand-navy hover:bg-slate-900 text-white font-bold py-3 rounded-xl transition text-sm">
+                        Entrar no Painel
+                    </button>
+                    <p id="teacherAuthError" class="text-xs text-red-600 text-center font-bold hidden">Senha incorreta! Tente novamente.</p>
+                </form>
+                
+                <div class="text-center pt-2">
+                    <button onclick="closeTeacherModal()" class="text-xs text-slate-400 hover:text-slate-600">Cancelar e Fechar</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Content (After Login) -->
+            <div id="teacherDashboardSection" class="space-y-6 hidden">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                    <div>
+                        <h2 class="text-xl font-black text-brand-navy flex items-center">
+                            <i class="fa-solid fa-user-shield text-brand-blue mr-2"></i> Gestão de Notas da Turma
+                        </h2>
+                        <p class="text-xs text-slate-500">Acompanhe os envios das 5 equipes e registre as notas da apresentação.</p>
+                    </div>
+                    <button onclick="closeTeacherModal()" class="text-slate-400 hover:text-slate-600">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Teacher Grade Table -->
+                <div class="space-y-3">
+                    <h3 class="text-sm font-bold text-slate-800 uppercase">Resumo das Equipes:</h3>
+                    
+                    <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                        <table class="w-full text-left text-xs text-slate-700">
+                            <thead class="bg-slate-100 text-slate-800 font-bold uppercase border-b border-slate-200">
+                                <tr>
+                                    <th class="p-3">Grupo</th>
+                                    <th class="p-3">Integrantes</th>
+                                    <th class="p-3">Caso Selecionado</th>
+                                    <th class="p-3">Status Respostas</th>
+                                    <th class="p-3 w-28">Nota (0 - 10)</th>
+                                    <th class="p-3">Parecer do Professor</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teacherTableBody" class="divide-y divide-slate-200">
+                                <!-- Injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Reset Section -->
+                <div class="pt-4 border-t border-slate-200 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-red-600 block">Reiniciar Atividade para Nova Turma:</span>
+                        <span class="text-[11px] text-slate-500">Apaga do navegador todas as escolhas de casos, nomes de alunos e respostas preenchidas.</span>
+                    </div>
+                    <button onclick="resetAllData()" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold text-xs px-4 py-2.5 rounded-xl transition border border-red-300">
+                        <i class="fa-solid fa-trash-can mr-1"></i> Resetar Dados
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= MODAL: GITHUB PAGES GUIDE ================= -->
+    <div id="githubModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden no-print">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-6 space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center">
+                    <i class="fa-brands fa-github text-slate-800 mr-2 text-xl"></i>
+                    Publicação no GitHub Pages
+                </h3>
+                <button onclick="closeGithubHelpModal()" class="text-slate-400 hover:text-slate-600">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <ol class="text-xs text-slate-600 space-y-3 list-decimal list-inside leading-relaxed">
+                <li>Crie uma conta gratuita em <strong class="text-slate-800">GitHub.com</strong>.</li>
+                <li>Crie um novo repositório público (ex: <code class="bg-slate-100 text-pink-600 px-1 py-0.5 rounded">estudo-caso-senai</code>).</li>
+                <li>Upload do arquivo <code class="bg-slate-100 text-pink-600 px-1 py-0.5 rounded">index.html</code> para a raiz do repositório.</li>
+                <li>Vá em <strong>Settings &gt; Pages</strong> no seu repositório.</li>
+                <li>Em <strong>Source</strong>, escolha a branch <code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded">main</code> e clique em <strong>Save</strong>.</li>
+                <li>Após 1 a 2 minutos, o GitHub gerará o link público para acessar a atividade!</li>
+            </ol>
+
+            <div class="pt-3 text-right">
+                <button onclick="closeGithubHelpModal()" class="bg-brand-navy text-white text-xs font-bold px-4 py-2 rounded-xl">Entendi!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 text-xs z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMessage">Mensagem de confirmação</span>
+    </div>
+
+    <!-- JS APP LOGIC -->
+    <script>
+        /* ==========================================================================
+           1. DATA STRUCTURE: 5 DETAILED INDUSTRIAL CASES (ELECTROLUX / SENAI)
+           ========================================================================== */
+        const CASES = [
+            {
+                id: 1,
+                title: "Caso 1: Qualidade vs. Meta de Produção na Linha de Montagem",
+                subtitle: "Pressão no final do turno para aprovar lote com ruído suspeito.",
+                category: "Linha de Montagem - Refrigeradores",
+                context: "Faltam 15 minutos para encerrar o turno na fábrica da Electrolux. A célula precisa entregar mais 5 refrigeradores para atingir a meta mensal e garantir o indicador da equipe. Na penúltima unidade, o aprendiz escuta um ruído vibratório incomum na fixação do compressor.",
+                characters: [
+                    { name: "Lucas (Aprendiz)", role: "Percebe a vibração fora do padrão e sugere travar a peça para checagem técnica." },
+                    { name: "Roberto (Operador Sênior)", role: "Exige liberar o lote imediatamente ('Na inspeção final eles ajustam se precisar')." },
+                    { name: "Carla (Líder de Célula)", role: "Pressionada pela gerência para não estourar os minutos de parada de linha." }
+                ],
+                techDilemma: "Aprovar produto com defeito pode gerar vazamento de fluido refrigerante, retorno em garantia e perda de confiabilidade da marca.",
+                behavioralDilemma: "Medo do aprendiz de se indispor com veteranos, pressão de grupo e atalhos operacionais para cumprir metas."
+            },
+            {
+                id: 2,
+                title: "Caso 2: Segurança do Trabalho (EPIs/LOTO) e 'Brincadeiras' no Chão de Fábrica",
+                subtitle: "Inobservância de procedimentos de bloqueio (LOTO) e provocações a quem cumpre as normas.",
+                category: "Estamparia e Prensa Mecânica",
+                context: "Para realizar o ajuste de uma matriz na prensa mecânica, o procedimento exige bloqueio elétrico total (Lockout/Tagout). Um mecânico experiente decide tentar fazer o ajuste rápido sem colocar o cadeado de segurança para 'ganhar tempo' e zomba de quem exige a regra.",
+                characters: [
+                    { name: "Beatriz (Aprendiz)", role: "Insiste que ninguém coloque as mãos na matriz sem o bloqueio elétrico completo." },
+                    { name: "Mateus (Mecânico Veterano)", role: "Debocha da aprendiz ('A aula de segurança do SENAI é bonita, mas na fábrica a gente trabalha rápido')." },
+                    { name: "Gabriel (Aprendiz)", role: "Assiste à provocação em silêncio por medo de também virar motivo de piada na célula." }
+                ],
+                techDilemma: "Risco iminente de acidente gravíssimo (prensamento de membros ou amputação) e descumprimento de Normas Regulamentadoras (NR-12).",
+                behavioralDilemma: "Pressão psicológica, bullying/zoação no ambiente fabril e omissão diante do perigo."
+            },
+            {
+                id: 3,
+                title: "Caso 3: Desperdício de Material, Refugo e Esconder o Erro",
+                subtitle: "Componente eletrônico danificado por descuido e a intenção de ocultar a falha.",
+                category: "Injeção Plástica e Placas Eletrônicas",
+                context: "Ao manusear uma bandeja com placas eletrônicas de controle da linha de lava-louças Electrolux, um aprendiz se distrai com o celular e derruba o lote, trincando a estrutura de 3 placas de alto valor agregado.",
+                characters: [
+                    { name: "Thiago (Aprendiz)", role: "Causa o dano por falta de atenção durante o transporte de material sensível." },
+                    { name: "Felipe (Aprendiz Amigo)", role: "Sugere esconder as placas no container de refugo comum e culpar o turno da noite pelo desfalque." },
+                    { name: "Mariana (Inspetora de Qualidade)", role: "Chega em seguida para realizar a contagem física e liberação do lote de montagem." }
+                ],
+                techDilemma: "Divergência de inventário de estoque, perda de rastreabilidade de lotes e descarte inadequado de componentes.",
+                behavioralDilemma: "Falta de honestidade, cumplicidade em erros e tentativa de transferir a responsabilidade para terceiros."
+            },
+            {
+                id: 4,
+                title: "Caso 4: Uso de Celular, Redes Sociais e Sigilo Industrial",
+                subtitle: "Gravação de vídeos dentro do galpão e vazamento de novo protótipo confidencial.",
+                category: "P&D e Protótipos de Fogões",
+                context: "Dentro das instalações fabris da Electrolux, o uso de celular é restrito por motivos de segurança e confidencialidade. Um aprendiz decide gravar uma 'dancinha' para rede social dentro da área de desenvolvimento e filma sem querer um fogão em fase de segredo industrial.",
+                characters: [
+                    { name: "Enzo (Aprendiz)", role: "Grava o vídeo e deseja postar imediatamente em suas redes sociais para ganhar curtidas." },
+                    { name: "Sofia (Aprendiz)", role: "Adverte que gravar dentro da fábrica viola o contrato de confidencialidade e pode gerar justa causa." },
+                    { name: "Caio (Aprendiz)", role: "Acha exagerado o alerta da colega e pede para ser marcado na publicação do vídeo." }
+                ],
+                techDilemma: "Vazamento de propriedade intelectual para concorrentes de mercado e risco de atropelamento por empilhadeira devido a distração.",
+                behavioralDilemma: "Imaturidade no uso de redes sociais, desrespeito ao regulamento interno e incapacidade de separar o pessoal do profissional."
+            },
+            {
+                id: 5,
+                title: "Caso 5: Inclusão, Diversidade e Respeito na Melhoria Contínua",
+                subtitle: "Preconceito e desvalorização de sugestões de aprendizes em reuniões de Kaizen/5S.",
+                category: "Melhoria Contínua e Logística",
+                context: "Em uma reunião de Kaizen para otimizar o transporte ergonômico de caixas pesadas de secadoras de roupas, uma aprendiz com deficiência auditiva apresenta uma solução simples e eficiente usando roletes inclinados.",
+                characters: [
+                    { name: "Júlia (Aprendiz PCD)", role: "Apresenta a ideia inovadora de melhoria contínua (*Kaizen*) desenhada em papel." },
+                    { name: "Vanderlei (Operador Antigo)", role: "Interrompe a aluna com impaciência e desmerece a proposta ('Aprendiz que acabou de chegar não entende a realidade da fábrica')." },
+                    { name: "Pedro (Aprendiz)", role: "Percebe o constrangimento e busca intervir de forma justa para garantir o espaço de fala da colega." }
+                ],
+                techDilemma: "Descarte injustificado de uma inovação que reduziria o desgaste ergonômico dos trabalhadores da linha.",
+                behavioralDilemma: "Preconceito (capacitismo/etarismo), falta de empatia, comunicação agressiva e resistência ao novo."
+            }
+        ];
+
+        /* ==========================================================================
+           2. STATE MANAGEMENT (LOCALSTORAGE)
+           ========================================================================== */
+        const STORAGE_KEY = 'ELECTROLUX_SENAI_STATE_2026';
+
+        let appState = {
+            activeGroupId: 1,
+            teacherAuth: false,
+            groups: {
+                1: { members: ['', '', ''], caseId: null, answers: { q1: '', q2: '', q3: '', q4: '', q5: '' }, grade: '', feedback: '' },
+                2: { members: ['', '', ''], caseId: null, answers: { q1: '', q2: '', q3: '', q4: '', q5: '' }, grade: '', feedback: '' },
+                3: { members: ['', '', ''], caseId: null, answers: { q1: '', q2: '', q3: '', q4: '', q5: '' }, grade: '', feedback: '' },
+                4: { members: ['', '', ''], caseId: null, answers: { q1: '', q2: '', q3: '', q4: '', q5: '' }, grade: '', feedback: '' },
+                5: { members: ['', '', ''], caseId: null, answers: { q1: '', q2: '', q3: '', q4: '', q5: '' }, grade: '', feedback: '' }
+            }
+        };
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    appState = { ...appState, ...parsed };
+                } catch (e) {
+                    console.error("Erro ao carregar o estado salvo", e);
+                }
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+        }
+
+        /* ==========================================================================
+           3. UI LOGIC & RENDERERS
+           ========================================================================== */
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            renderCasesStatusGrid();
+            populateCaseSelectOptions();
+            loadGroupIntoRegistrationForm(appState.activeGroupId);
+            renderCaseDetailView(appState.activeGroupId);
+            
+            // Set Print Date
+            const today = new Date();
+            document.getElementById('printDate').innerText = today.toLocaleDateString('pt-BR');
+        });
+
+        function showToast(msg, iconClass = 'fa-circle-check text-emerald-400') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            toastMsg.innerText = msg;
+            toastIcon.className = `fa-solid ${iconClass} text-base`;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-brand-blue', 'text-brand-blue');
+                btn.classList.add('border-transparent', 'text-slate-500');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            document.getElementById(`tab-${tabName}`).classList.add('border-brand-blue', 'text-brand-blue');
+            document.getElementById(`tab-${tabName}`).classList.remove('border-transparent', 'text-slate-500');
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+        }
+
+        function getLockedCasesMap() {
+            const map = {};
+            Object.keys(appState.groups).forEach(gNum => {
+                const caseId = appState.groups[gNum].caseId;
+                if (caseId) {
+                    map[caseId] = parseInt(gNum);
+                }
+            });
+            return map;
+        }
+
+        function renderCasesStatusGrid() {
+            const container = document.getElementById('casesStatusGrid');
+            const lockedMap = getLockedCasesMap();
+
+            container.innerHTML = CASES.map(c => {
+                const lockedByGroup = lockedMap[c.id];
+                const isLocked = !!lockedByGroup;
+
+                return `
+                    <div class="p-4 rounded-xl border ${isLocked ? 'bg-slate-50 border-slate-200' : 'bg-white border-blue-200 shadow-sm'} transition flex flex-col md:flex-row md:items-center justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs font-bold ${isLocked ? 'bg-slate-200 text-slate-700' : 'bg-blue-100 text-brand-blue'} px-2.5 py-0.5 rounded-md">
+                                    Caso ${c.id}
+                                </span>
+                                <span class="text-xs font-semibold text-slate-500">${c.category}</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-800">${c.title}</h4>
+                            <p class="text-xs text-slate-500">${c.subtitle}</p>
+                        </div>
+
+                        <div class="shrink-0 flex items-center space-x-2">
+                            ${isLocked 
+                                ? `<span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300">
+                                     <i class="fa-solid fa-lock text-[10px] mr-1.5"></i> Reservado p/ Grupo ${lockedByGroup}
+                                   </span>`
+                                : `<span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                     <i class="fa-solid fa-circle-check text-[10px] mr-1.5"></i> Disponível
+                                   </span>`
+                            }
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function populateCaseSelectOptions() {
+            const select = document.getElementById('selectCaseId');
+            const currentSelectedGroup = parseInt(document.getElementById('selectGroupNumber').value);
+            const lockedMap = getLockedCasesMap();
+            const currentGroupAssignedCase = appState.groups[currentSelectedGroup].caseId;
+
+            select.innerHTML = '<option value="">-- Escolha um Estudo de Caso --</option>' + 
+                CASES.map(c => {
+                    const lockedBy = lockedMap[c.id];
+                    const isLockedByOther = lockedBy && lockedBy !== currentSelectedGroup;
+                    const isSelectedByThisGroup = currentGroupAssignedCase === c.id;
+
+                    return `<option value="${c.id}" ${isLockedByOther ? 'disabled' : ''} ${isSelectedByThisGroup ? 'selected' : ''}>
+                        Caso ${c.id}: ${c.title.split(':')[1] || c.title} ${isLockedByOther ? `(Reservado pelo Grupo ${lockedBy})` : ''}
+                    </option>`;
+                }).join('');
+        }
+
+        function onGroupSelectChange() {
+            const gNum = parseInt(document.getElementById('selectGroupNumber').value);
+            loadGroupIntoRegistrationForm(gNum);
+        }
+
+        function loadGroupIntoRegistrationForm(gNum) {
+            document.getElementById('selectGroupNumber').value = gNum;
+            const groupData = appState.groups[gNum];
+
+            document.getElementById('member1').value = groupData.members[0] || '';
+            document.getElementById('member2').value = groupData.members[1] || '';
+            document.getElementById('member3').value = groupData.members[2] || '';
+
+            populateCaseSelectOptions();
+        }
+
+        function handleRegisterGroup(e) {
+            e.preventDefault();
+            const gNum = parseInt(document.getElementById('selectGroupNumber').value);
+            const m1 = document.getElementById('member1').value.trim();
+            const m2 = document.getElementById('member2').value.trim();
+            const m3 = document.getElementById('member3').value.trim();
+            const caseIdVal = document.getElementById('selectCaseId').value;
+
+            if (!m1) {
+                showToast('Informe ao menos o primeiro integrante da equipe!', 'fa-circle-exclamation text-amber-400');
+                return;
+            }
+            if (!caseIdVal) {
+                showToast('Selecione um Estudo de Caso!', 'fa-circle-exclamation text-amber-400');
+                return;
+            }
+
+            const caseId = parseInt(caseIdVal);
+
+            // Save group registration and lock case
+            appState.groups[gNum].members = [m1, m2, m3];
+            appState.groups[gNum].caseId = caseId;
+            appState.activeGroupId = gNum;
+
+            saveState();
+            renderCasesStatusGrid();
+            populateCaseSelectOptions();
+            renderCaseDetailView(gNum);
+
+            showToast(`Grupo ${gNum} cadastrado e Caso ${caseId} bloqueado com sucesso!`, 'fa-circle-check text-emerald-400');
+            
+            // Auto switch to Case View tab
+            setTimeout(() => switchTab('estudo'), 500);
+        }
+
+        function changeActiveGroupView(gNum) {
+            appState.activeGroupId = parseInt(gNum);
+            saveState();
+            renderCaseDetailView(appState.activeGroupId);
+        }
+
+        function renderCaseDetailView(gNum) {
+            document.getElementById('switchActiveGroupSelect').value = gNum;
+            const groupData = appState.groups[gNum];
+            const caseId = groupData.caseId;
+
+            // Members text rendering
+            const validMembers = groupData.members.filter(m => m && m.trim().length > 0);
+            const membersStr = validMembers.length > 0 ? validMembers.join(', ') : 'Nenhum integrante cadastrado';
+            
+            document.getElementById('activeGroupDisplayTitle').innerText = `Grupo ${gNum} — ${validMembers[0] ? validMembers[0].split(' ')[0] : 'Sem Cadastro'}`;
+            
+            // Print Elements
+            document.getElementById('printGroupName').innerText = `Grupo ${gNum}`;
+            document.getElementById('printMembers').innerText = membersStr;
+
+            if (!caseId) {
+                document.getElementById('caseDisplayTitle').innerText = `Grupo ${gNum} ainda não escolheu um caso.`;
+                document.getElementById('caseDisplaySubtitle').innerText = "Acesse a aba '1. Painel de Grupos & Casos' para registrar os alunos e escolher o caso.";
+                document.getElementById('caseDisplayContext').innerText = "Aguardando reserva do caso pelo grupo.";
+                document.getElementById('caseDisplayCharacters').innerHTML = '';
+                document.getElementById('caseDisplayTechDilemma').innerText = '-';
+                document.getElementById('caseDisplayBehavioralDilemma').innerText = '-';
+                document.getElementById('printCaseTitle').innerText = 'Nenhum caso selecionado';
+                return;
+            }
+
+            const cObj = CASES.find(c => c.id === caseId);
+            if (!cObj) return;
+
+            document.getElementById('printCaseTitle').innerText = cObj.title;
+            document.getElementById('caseDisplayTitle').innerText = cObj.title;
+            document.getElementById('caseDisplaySubtitle').innerText = cObj.subtitle;
+            document.getElementById('caseDisplayContext').innerText = cObj.context;
+            document.getElementById('caseCategoryBadge').innerText = cObj.category;
+
+            document.getElementById('caseDisplayCharacters').innerHTML = cObj.characters.map(char => `
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                    <span class="font-bold text-xs text-brand-navy block">${char.name}</span>
+                    <span class="text-[11px] text-slate-600 block mt-0.5">${char.role}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('caseDisplayTechDilemma').innerText = cObj.techDilemma;
+            document.getElementById('caseDisplayBehavioralDilemma').innerText = cObj.behavioralDilemma;
+
+            // Load Answers into Form
+            const ans = groupData.answers || {};
+            document.getElementById('ans1').value = ans.q1 || '';
+            document.getElementById('ans2').value = ans.q2 || '';
+            document.getElementById('ans3').value = ans.q3 || '';
+            document.getElementById('ans4').value = ans.q4 || '';
+            document.getElementById('ans5').value = ans.q5 || '';
+
+            // Load Teacher feedback into print area
+            document.getElementById('printTeacherGrade').innerText = groupData.grade ? `[ ${groupData.grade} / 10.0 ]` : '[ ____ / 10.0 ]';
+            document.getElementById('printTeacherFeedback').innerText = groupData.feedback || 'Nenhum parecer registrado pelo docente.';
+        }
+
+        function handleSaveAnswers(e) {
+            e.preventDefault();
+            const gNum = appState.activeGroupId;
+            if (!appState.groups[gNum].caseId) {
+                showToast('Escolha um caso antes de salvar as respostas!', 'fa-circle-exclamation text-amber-400');
+                return;
+            }
+
+            appState.groups[gNum].answers = {
+                q1: document.getElementById('ans1').value,
+                q2: document.getElementById('ans2').value,
+                q3: document.getElementById('ans3').value,
+                q4: document.getElementById('ans4').value,
+                q5: document.getElementById('ans5').value
+            };
+
+            saveState();
+            showToast(`Respostas do Grupo ${gNum} salvas no sistema!`, 'fa-circle-check text-emerald-400');
+        }
+
+        function generateAndPrintPDF() {
+            const gNum = appState.activeGroupId;
+            const groupData = appState.groups[gNum];
+
+            if (!groupData.caseId) {
+                showToast('Cadastre o grupo e escolha o caso antes de gerar o PDF!', 'fa-circle-exclamation text-amber-400');
+                return;
+            }
+
+            // Save answers before opening print dialog
+            appState.groups[gNum].answers = {
+                q1: document.getElementById('ans1').value,
+                q2: document.getElementById('ans2').value,
+                q3: document.getElementById('ans3').value,
+                q4: document.getElementById('ans4').value,
+                q5: document.getElementById('ans5').value
+            };
+            saveState();
+
+            // Trigger window print
+            window.print();
+        }
+
+        /* ==========================================================================
+           4. TEACHER DASHBOARD & AUTH
+           ========================================================================== */
+        function openTeacherModal() {
+            document.getElementById('teacherModal').classList.remove('hidden');
+            if (appState.teacherAuth) {
+                showTeacherDashboard();
+            } else {
+                document.getElementById('teacherAuthSection').classList.remove('hidden');
+                document.getElementById('teacherDashboardSection').classList.add('hidden');
+            }
+        }
+
+        function closeTeacherModal() {
+            document.getElementById('teacherModal').classList.add('hidden');
+        }
+
+        function handleTeacherLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('teacherPassword').value;
+            if (pass === 'senai2026') {
+                appState.teacherAuth = true;
+                document.getElementById('teacherAuthError').classList.add('hidden');
+                showTeacherDashboard();
+            } else {
+                document.getElementById('teacherAuthError').classList.remove('hidden');
+            }
+        }
+
+        function showTeacherDashboard() {
+            document.getElementById('teacherAuthSection').classList.add('hidden');
+            document.getElementById('teacherDashboardSection').classList.remove('hidden');
+            renderTeacherTable();
+        }
+
+        function renderTeacherTable() {
+            const tbody = document.getElementById('teacherTableBody');
+            
+            tbody.innerHTML = Object.keys(appState.groups).map(gNum => {
+                const g = appState.groups[gNum];
+                const validMembers = g.members.filter(m => m && m.trim().length > 0);
+                const hasAnswers = g.answers && Object.values(g.answers).some(a => a && a.trim().length > 0);
+                const caseObj = CASES.find(c => c.id === g.caseId);
+
+                return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-3 font-bold text-slate-800">Grupo ${gNum}</td>
+                        <td class="p-3 text-slate-600">${validMembers.length > 0 ? validMembers.join('<br>') : '<span class="text-slate-400 italic">Sem integrantes</span>'}</td>
+                        <td class="p-3 text-slate-700 font-semibold">${caseObj ? `Caso ${caseObj.id}: ${caseObj.title.split(':')[1]}` : '<span class="text-slate-400 italic">Pendente</span>'}</td>
+                        <td class="p-3">
+                            ${hasAnswers 
+                                ? '<span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-1 rounded-full">Preenchido</span>' 
+                                : '<span class="bg-slate-100 text-slate-500 text-[10px] font-bold px-2 py-1 rounded-full">Pendente</span>'
+                            }
+                        </td>
+                        <td class="p-3">
+                            <input type="number" step="0.5" min="0" max="10" value="${g.grade || ''}" onchange="updateGroupGrade(${gNum}, this.value)" placeholder="0.0" class="w-20 bg-slate-50 border border-slate-300 rounded p-1 text-xs font-bold text-slate-800">
+                        </td>
+                        <td class="p-3">
+                            <textarea rows="1" onchange="updateGroupFeedback(${gNum}, this.value)" placeholder="Observações do professor..." class="w-full bg-slate-50 border border-slate-300 rounded p-1 text-xs">${g.feedback || ''}</textarea>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateGroupGrade(gNum, val) {
+            appState.groups[gNum].grade = val;
+            saveState();
+            showToast(`Nota do Grupo ${gNum} salva!`);
+        }
+
+        function updateGroupFeedback(gNum, val) {
+            appState.groups[gNum].feedback = val;
+            saveState();
+        }
+
+        function resetAllData() {
+            // Replaced alert/confirm with an inline check UI or window.confirm fallback
+            if (window.confirm("Atenção Docente: Esta ação vai apagar todas as seleções de casos, nomes e respostas dos alunos para uma nova turma. Deseja continuar?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        }
+
+        function openGithubHelpModal() {
+            document.getElementById('githubModal').classList.remove('hidden');
+        }
+
+        function closeGithubHelpModal() {
+            document.getElementById('githubModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
